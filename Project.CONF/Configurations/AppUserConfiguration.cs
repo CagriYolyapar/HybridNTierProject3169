@@ -10,6 +10,9 @@ namespace Project.CONF.Configurations
 {
     public class AppUserConfiguration : BaseConfiguration<AppUser>
     {
+    
+
+
         public override void Configure(EntityTypeBuilder<AppUser> builder)
         {
             base.Configure(builder);

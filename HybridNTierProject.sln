@@ -15,6 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.COREMVC", "Project.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{60D54CE3-9E3D-499D-8016-50E5030D3DAD}"
 	ProjectSection(SolutionItems) = preProject
+		ProjeAdimlari.txt = ProjeAdimlari.txt
 		ProjeTeknikDokumantasyonu.txt = ProjeTeknikDokumantasyonu.txt
 		ReadMe.txt = ReadMe.txt
 	EndProjectSection
