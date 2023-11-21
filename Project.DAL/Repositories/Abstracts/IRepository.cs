@@ -10,9 +10,6 @@ namespace Project.DAL.Repositories.Abstracts
 {
     public interface IRepository<T> where T:IEntity
     {
-        //Todo: BaseRepository implementation'i yapılacak
-       
-
         //List Commands
 
         List<T> GetAll();
@@ -25,6 +22,7 @@ namespace Project.DAL.Repositories.Abstracts
         void Add(T item);
         void AddAsync(T item);
         void AddRange(List<T> list);
+        void AddRangeAsync(List<T> list);
         void Delete(T item);
         void DeleteRange(List<T> list);
         void UpdateAsync(T item);
@@ -35,7 +33,9 @@ namespace Project.DAL.Repositories.Abstracts
         //Linq Commands
         List<T> Where(Expression<Func<T,bool>> exp);
         bool Any(Expression<Func<T,bool>> exp);
+        bool AnyAsync(Expression<Func<T,bool>> exp);
         T FirstOrDefault(Expression<Func<T, bool>> exp);
+        T FirstOrDefaultAsync(Expression<Func<T, bool>> exp);
         object Select(Expression<Func<T, object>> exp);
         IQueryable<X> Select<X>(Expression<Func<T, X>> exp);
 

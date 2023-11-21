@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Project.ENTITIES.Models;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace Project.CONF.Configurations
                 x.OrderID,
                 x.ProductID
             });
+            builder.Property(x => x.UnitPrice).HasColumnType("money");
         }
     }
 }

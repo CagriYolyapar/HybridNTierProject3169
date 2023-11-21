@@ -13,6 +13,7 @@ namespace Project.ENTITIES.Models
         public string NameDescription { get; set; }//Üye olmayan bir kullanıcının isim acıklaması  burada tutulur(null gecildiyse anlayın ki kullanıcı üye olarak alısveriş yapmıstır)
         public int? AppUserID { get; set; } //null gecilebiliyorsa anlayın ki kullanıcı üye degildir 
         //TOdo: buradaki AppUser iş akısını ödev olarak ver
+        public decimal PriceOfOrder { get; set; } //Siparişin toplam fiyatı(Sepetin onaylanan fiyatı)
 
         //Relational Properties
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
