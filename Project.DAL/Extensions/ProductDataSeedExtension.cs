@@ -31,6 +31,8 @@ namespace Project.DAL.Extensions
                     ImagePath = new Images().Nightlife()
 
                 };
+
+                products.Add(p);
             }
 
             modelBuilder.Entity<Product>().HasData(products);
