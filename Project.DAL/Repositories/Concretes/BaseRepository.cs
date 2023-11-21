@@ -16,6 +16,8 @@ namespace Project.DAL.Repositories.Concretes
     {
         protected MyContext _db;
 
+     
+
         public BaseRepository(MyContext db)
         {
             _db = db;
@@ -150,7 +152,7 @@ namespace Project.DAL.Repositories.Concretes
             Save();
         }
 
-        public async Task UpdateRange(List<T> list)
+        public async Task UpdateRangeAsync(List<T> list)
         {
             foreach (T item in list) await UpdateAsync(item);
 
