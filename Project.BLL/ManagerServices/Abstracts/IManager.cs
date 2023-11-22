@@ -6,9 +6,10 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.DAL.Repositories.Abstracts
+namespace Project.BLL.ManagerServices.Abstracts
 {
-    public interface IRepository<T> where T:IEntity
+    //Bu interface'in icerisindeki metotlar Repository'deki metotlarınıza denk düsmek isterler...Ancak imzaları aynı olmak zorunda degildir...
+    public interface IManager<T> where T:IEntity
     {
         //List Commands
 
@@ -20,21 +21,21 @@ namespace Project.DAL.Repositories.Abstracts
 
         //Modify Commands
 
-        void Add(T item);
+        string Add(T item);
         Task AddAsync(T item);
-        void AddRange(List<T> list);
-        Task AddRangeAsync(List<T> list);
+        string AddRange(List<T> list);
+        Task<string> AddRangeAsync(List<T> list);
         void Delete(T item);
         void DeleteRange(List<T> list);
         Task UpdateAsync(T item);
         Task UpdateRangeAsync(List<T> list);
-        void Destroy(T item);
-        void DestroyRange(List<T> list);
+        string Destroy(T item);
+        string DestroyRange(List<T> list);
 
         //Linq Commands
-        List<T> Where(Expression<Func<T,bool>> exp);
-        bool Any(Expression<Func<T,bool>> exp);
-        Task<bool> AnyAsync(Expression<Func<T,bool>> exp);
+        List<T> Where(Expression<Func<T, bool>> exp);
+        bool Any(Expression<Func<T, bool>> exp);
+        Task<bool> AnyAsync(Expression<Func<T, bool>> exp);
         T FirstOrDefault(Expression<Func<T, bool>> exp);
         Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> exp);
         object Select(Expression<Func<T, object>> exp);
@@ -46,7 +47,5 @@ namespace Project.DAL.Repositories.Abstracts
         List<T> GetLastDatas(int count);
         //First Datas
         List<T> GetFirstDatas(int count);
-
-
     }
 }

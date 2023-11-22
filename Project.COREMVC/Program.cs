@@ -9,8 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddIdentityServices();
 
 builder.Services.AddDbContextService(); //DbContextService'imizi BLL'den alarak Middleware'e ekledik...
-
-//builder.Services.AddDbContextPool<MyContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection")).UseLazyLoadingProxies());
+builder.Services.AddRepServices();
 
 
 WebApplication app = builder.Build();

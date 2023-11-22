@@ -106,6 +106,8 @@ namespace Project.DAL.Repositories.Concretes
             return Where(x => x.Status != ENTITIES.Enums.DataStatus.Deleted);
         }
 
+        
+
         public List<T> GetAll()
         {
             return _db.Set<T>().ToList();
@@ -140,6 +142,7 @@ namespace Project.DAL.Repositories.Concretes
 
         public IQueryable<X> Select<X>(Expression<Func<T, X>> exp)
         {
+            
             return _db.Set<T>().Select(exp);
         }
 
@@ -161,6 +164,11 @@ namespace Project.DAL.Repositories.Concretes
         public List<T> Where(Expression<Func<T, bool>> exp)
         {
             return _db.Set<T>().Where(exp).ToList();
+        }
+
+        public async Task<List<T>> GetActivesAsync()
+        {
+            return await _db.Set<T>().Where(x => x.Status != ENTITIES.Enums.DataStatus.Deleted).ToListAsync();
         }
     }
 }
