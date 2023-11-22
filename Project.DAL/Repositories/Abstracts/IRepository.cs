@@ -21,6 +21,9 @@ namespace Project.DAL.Repositories.Abstracts
         //Modify Commands
 
         void Add(T item);
+        
+
+        
         Task AddAsync(T item);
         void AddRange(List<T> list);
         Task AddRangeAsync(List<T> list);

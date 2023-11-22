@@ -19,7 +19,7 @@ namespace Project.BLL.ManagerServices.Concretes
     //Todo : Buradaki Domain Entity'leri DTO'ya cevirerek Manager sınıflarının DTO ile calısmasını saglayın...
 
 
-    public class BaseManager<T> : IManager<T> where T : class, IEntity
+    public  class BaseManager<T> : IManager<T> where T : class, IEntity
     {
         //Bu class Repository ile birlikte calısmak istiyor...
 

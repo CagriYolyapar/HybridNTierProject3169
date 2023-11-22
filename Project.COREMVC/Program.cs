@@ -10,6 +10,7 @@ builder.Services.AddIdentityServices();
 
 builder.Services.AddDbContextService(); //DbContextService'imizi BLL'den alarak Middleware'e ekledik...
 builder.Services.AddRepServices();
+builder.Services.AddManagerServices();
 
 
 WebApplication app = builder.Build();
