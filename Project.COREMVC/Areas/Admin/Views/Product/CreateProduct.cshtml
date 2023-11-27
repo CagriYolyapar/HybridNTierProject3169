@@ -1,0 +1,40 @@
+﻿@model CreateProductPageVM
+
+@{
+
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+
+}
+
+@*Eger Front End'den(Client'ten) bir dosya upload'i istiyorsanız form element'ine attribute olarak koymanız gereken özel bir ifade vardır...Siz aynı zamanda bir dosyayı direkt modele bind etmezsiniz..Onu ayrı bir parametreye alırsınız ve o sekilde gönderirsiniz...*@
+
+
+<form asp-action="CreateProduct" asp-controller="Product" method="post" class="p-3 w-75 m-auto" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label>Ürün ismini giriniz</label>
+        <input asp-for="Product.ProductName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Fiyat giriniz</label>
+        <input asp-for="Product.UnitPrice" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Kategori Seciniz</label>
+        <select asp-for="Product.CategoryID" asp-items='new SelectList(Model.Categories,"ID","CategoryName")'>
+           
+        </select>
+    </div>
+
+
+    <div class="mb-3">
+        <label>Dosya seciniz</label>
+        <input type="file" name="formFile" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <button class="btn btn-primary">Ürün Ekle</button>
+    </div>
+</form>

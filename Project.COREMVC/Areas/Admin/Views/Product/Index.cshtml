@@ -1,4 +1,4 @@
-﻿@model List<Category>
+﻿@model List<Product>
 
 
 @{
@@ -13,35 +13,39 @@
 
 <section class="panel">
     <header class="panel-heading">
-        Yeni kategori eklemek icin <a asp-action="CreateCategory">tıklayınız</a>
+        Yeni ürün eklemek icin <a asp-action="CreateProduct">tıklayınız</a>
     </header>
     <div class="panel-body">
         <div class="adv-table">
             <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
                 <thead>
                     <tr>
-                        <th>Kategori ID</th>
-                        <th>Kategori Ismi</th>
-                        <th class="hidden-phone">Acıklaması</th>
+                        <th>Ürün ID</th>
+                        <th>Ürün Ismi</th>
+                        <th class="hidden-phone">Fiyatı</th>
+                        <th class="hidden-phone">Kategorisi</th>
+                        <th class="hidden-phone">Resim</th>
                         <th class="hidden-phone">Durumu</th>
                         <th class="hidden-phone">Guncelle</th>
                         <th class="hidden-phone">Sil</th>
-                        <th class="hidden-phone">Yok et</th>
+                       
                     </tr>
                 </thead>
                 <tbody>
-
-                    @foreach (Category item in Model)
+                    
+                    @foreach (Product item in Model)
                     {
 
                         <tr class="gradeX">
                             <td>@item.ID</td>
-                            <td>   @item.CategoryName  </td>
-                            <td class="hidden-phone">@item.Description</td>
+                            <td>   @item.ProductName  </td>
+                            <td class="hidden-phone">@item.UnitPrice</td>
+                            <td class="hidden-phone">@item.Category.CategoryName</td>
+                            <td class="hidden-phone"><img width="30" height="30" src="@item.ImagePath"/></td>
                             <td class="hidden-phone">@item.Status</td>
                             <td class="center hidden-phone"><a asp-action="UpdateCategory" asp-route-id="@item.ID" class="btn btn-warning"> Güncelle </a>   </td>
                             <td class="center hidden-phone">  <a asp-action="DeleteCategory" asp-route-id="@item.ID" class="btn btn-danger"> Sil </a>   </td>
-                            <td class="center hidden-phone">  <a asp-action="DestroyCategory" asp-route-id="@item.ID" class="btn btn-success"> Yok Et </a>   </td>
+                         
 
                         </tr>
                     }
