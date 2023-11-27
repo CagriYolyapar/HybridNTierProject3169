@@ -1,1 +1,4 @@
 ﻿1 => AppUser tarafındaki Repository'ler ve ServiceManager'larda Identity'den gelen UserManager ve SignInManager gibi sistemleri ekstra encapsulation'a sokun...(Ornek AppUserRepository'de biraz ipucuyla gösterilmiştir)
+
+
+2 => Identity sistemini ayrıntılı bir şekilde tamamlayın...
