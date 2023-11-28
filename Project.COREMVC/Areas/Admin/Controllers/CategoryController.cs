@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Project.BLL.ManagerServices.Abstracts;
+using Project.BLL.ManagerServices.Concretes;
 using Project.ENTITIES.Models;
 
 namespace Project.COREMVC.Areas.Admin.Controllers
@@ -10,10 +11,12 @@ namespace Project.COREMVC.Areas.Admin.Controllers
     public class CategoryController : Controller
     {
         readonly ICategoryManager _categoryManager;
+        //CategorySimulationManager _catSimMan;
 
         public CategoryController(ICategoryManager categoryManager)
         {
             _categoryManager = categoryManager;
+            //_catSimMan = new CategorySimulationManager();
         }
 
         //Refactor Domain Entity'leri düzenleyin
@@ -33,6 +36,8 @@ namespace Project.COREMVC.Areas.Admin.Controllers
         {
             return View();
         }
+
+        //Burada normal şartlar altında CreateCategoryRequestModel alırsınız.. Aldıgınız MOdel'in Validation kurallarına uydugundan tamamen emin olmalısınız....Ondan sonra CreateCategoryRequestModel burada CategoryDTO'ya maplenir...Ve CategorySimulationManager icerisindeki Add cagrılarak DTO class'ı verilir...
 
         [HttpPost]
         public async Task<IActionResult> CreateCategory(Category model)
