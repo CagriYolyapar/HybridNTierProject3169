@@ -1,4 +1,4 @@
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Project.BLL.ServiceInjections;
 using Project.COREMVC.EmailService;
 using Project.COREMVC.Models;
@@ -8,6 +8,14 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddDistributedMemoryCache(); //Eger Session kompleks yapılarla calısmak icin Extension metodu eklenme durumuna maruz kalmıssa bu kod projenizin saglıklı calısması icin gereklidir...
+
+builder.Services.AddSession(x =>
+{
+    x.IdleTimeout = TimeSpan.FromMinutes(1); //Projeyi kişinin bos durma süresi eger 1 dakikalık bir bos durma süresi olursa Session bosa cıksın...
+    x.Cookie.HttpOnly = true; //document.cookie'den ilgili bilginin gözlemlenmesi
+    x.Cookie.IsEssential = true;
+});
 
 builder.Services.AddIdentityServices();
 
@@ -29,6 +37,8 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthentication();
 
