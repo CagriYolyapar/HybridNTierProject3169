@@ -6,6 +6,10 @@ namespace Project.COREMVC.Models.ShoppingTools
     [Serializable]
     public class CartItem
     {
+        public CartItem()
+        {
+            Amount++;
+        }
         [JsonProperty("ID")]
         public int ID { get; set; }
 
@@ -20,6 +24,17 @@ namespace Project.COREMVC.Models.ShoppingTools
 
         [JsonProperty("SubTotal")]
         public decimal SubTotal { get { return Amount * UnitPrice; } }
+
+        [JsonProperty("ImagePath")]
+        public string ImagePath { get; set; }
+
+        [JsonProperty("CategoryID")]
+        public int? CategoryID { get; set; }
+
+        [JsonProperty("CategoryName")]
+        public string CategoryName { get; set; }
+
+
 
     }
 }

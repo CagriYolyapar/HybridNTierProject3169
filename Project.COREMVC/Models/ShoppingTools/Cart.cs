@@ -5,6 +5,7 @@ namespace Project.COREMVC.Models.ShoppingTools
     [Serializable]
     public class Cart
     {
+        [JsonProperty("_myCart")]
         Dictionary<int, CartItem> _myCart;
 
         public Cart()
