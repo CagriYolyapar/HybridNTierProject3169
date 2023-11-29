@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Project.BLL.ManagerServices.Abstracts;
+using Project.COREMVC.Models.Orders;
 using Project.COREMVC.Models.PageVms;
 using Project.COREMVC.Models.SessionService;
 using Project.COREMVC.Models.ShoppingTools;
@@ -12,25 +13,29 @@ namespace Project.COREMVC.Controllers
     {
         readonly IProductManager _productManager;
         readonly ICategoryManager _categoryManager;
+        readonly IOrderManager _orderManager;
+        readonly IOrderDetailManager _orderDetailManager;
 
-        public ShoppingController(IProductManager productManager, ICategoryManager categoryManager)
+        public ShoppingController(IProductManager productManager, ICategoryManager categoryManager, IOrderManager orderManager, IOrderDetailManager orderDetailManager)
         {
             _productManager = productManager;
             _categoryManager = categoryManager;
+            _orderManager = orderManager;
+            _orderDetailManager = orderDetailManager;
         }
-        public IActionResult Index(int? page,int? categoryID)
+        public IActionResult Index(int? page, int? categoryID)
         {
             //string a = "Cagri";
             //string b = a ?? "Deneme";
             ShoppingPageVM spVm = new ShoppingPageVM()
             {
-                Products = categoryID == null ? _productManager.GetActives().ToPagedList(page ?? 1,5) : _productManager.Where(x=>x.CategoryID == categoryID).ToPagedList(page ?? 1 , 5),
+                Products = categoryID == null ? _productManager.GetActives().ToPagedList(page ?? 1, 5) : _productManager.Where(x => x.CategoryID == categoryID).ToPagedList(page ?? 1, 5),
 
                 Categories = _categoryManager.GetActives()
             };
 
             if (categoryID != null) TempData["catID"] = categoryID;
-          
+
 
             return View(spVm);
         }
@@ -79,18 +84,31 @@ namespace Project.COREMVC.Controllers
             {
                 Cart c = GetCartFromSession("scart");
                 c.RemoveFromCart(id);
-                SetCart(c); 
-               
-                if (c.GetCartItems.Count == 0)
-                {
-                    HttpContext.Session.Remove("scart");
-                    TempData["message"] = "Sepetinizdeki tüm ürünler cıkarılmıstır";
-                    return RedirectToAction("Index");
-                }
+                SetCart(c);
 
-              
+                ControlCart(c);
+
+
             }
 
+            return RedirectToAction("CartPage");
+        }
+
+        void ControlCart(Cart c)
+        {
+            if (c.GetCartItems.Count == 0) HttpContext.Session.Remove("scart");
+        }
+
+        public IActionResult DecreaseFromCart(int id)
+        {
+            if (GetCartFromSession("scart") != null)
+            {
+                Cart c = GetCartFromSession("scart");
+                c.Decrease(id);
+                SetCart(c);
+                ControlCart(c);
+
+            }
             return RedirectToAction("CartPage");
         }
 
@@ -99,6 +117,60 @@ namespace Project.COREMVC.Controllers
         Cart GetCartFromSession(string key)
         {
             return HttpContext.Session.GetObject<Cart>(key);
+        }
+
+
+        public IActionResult ConfirmOrder()
+        {
+
+
+            return View();
+        }
+
+
+
+
+        //Todo: API islemleri hazırlandıgında bu Post'a entegre edilecek
+        [HttpPost]
+        public async Task<IActionResult> ConfirmOrder(OrderRequestPageVM ovm)
+        {
+            Cart c = GetCartFromSession("scart");
+            ovm.Order.PriceOfOrder = c.TotalPrice;
+
+            //API Entegrasyonu
+            await _orderManager.AddAsync(ovm.Order); //Once Order'in ID'sinin olusması lazım...Burada Order'i kaydederek o ID'nin Identity sayesinde olusmasını saglıyoruz....
+
+            foreach (CartItem item in c.GetCartItems)
+            {
+                OrderDetail od = new();
+                od.OrderID = ovm.Order.ID;
+                od.ProductID = item.ID;
+                od.Quantity = item.Amount;
+                od.UnitPrice = item.UnitPrice;
+                //od.TotalPrice = item.SubTotal;
+                await _orderDetailManager.AddAsync(od);
+
+                //Stoktan da düsürelim
+
+                Product stoktanDusurulecek = await _productManager.FindAsync(item.ID);
+                stoktanDusurulecek.UnitsInStock -= item.Amount;
+                await _productManager.UpdateAsync(stoktanDusurulecek);
+
+                //Algoritma ödevi : Eger stoktan düsürüldügünde stokta kalmayacak bir şekilde bir item varsa onun Amount'ı sepette aşılamayacak bir hale geldim...
+
+            }
+
+            TempData["message"] = "Siparişiniz bize basarıyla ulasmıstır.Tesekkür ederiz";
+            //Todo : Email gönderme işlemi (Karar mekanizmasıyla uyeye veya uye olmayana gönderme yöntemi belirlensin)
+
+            HttpContext.Session.Remove("scart");
+            return RedirectToAction("Index");
+
+
+
+
+
+
         }
     }
 }
