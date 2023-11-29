@@ -1,7 +1,7 @@
 ﻿using Project.ENTITIES.Models;
 using X.PagedList;
 
-namespace Project.COREMVC.Models.PaveVms
+namespace Project.COREMVC.Models.PageVms
 {
     public class ShoppingPageVM
     {

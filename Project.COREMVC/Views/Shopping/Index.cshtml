@@ -1,66 +1,99 @@
-﻿<div class="row">
+﻿@model ShoppingPageVM
+
+<div class="row">
     <div class="col-md-3">
-   
+
         <section class="panel">
             <header class="panel-heading">
-                Category
+                Categories
             </header>
             <div class="panel-body">
                 <ul class="nav prod-cat">
-                 
-                    <li><a href="#"><i class=" icon-angle-right"></i> Bags & Purses</a></li>
-                    <li><a href="#"><i class=" icon-angle-right"></i> Beauty</a></li>
-                    <li><a href="#"><i class=" icon-angle-right"></i> Coat & Jacket</a></li>
-                    <li><a href="#"><i class=" icon-angle-right"></i> Jeans</a></li>
-                    <li><a href="#"><i class=" icon-angle-right"></i> Jewellery</a></li>
-                    <li><a href="#"><i class=" icon-angle-right"></i> Electronics</a></li>
-                    <li><a href="#"><i class=" icon-angle-right"></i> Sports</a></li>
-                    <li><a href="#"><i class=" icon-angle-right"></i> Technology</a></li>
-                    <li><a href="#"><i class=" icon-angle-right"></i> Watches</a></li>
-                    <li><a href="#"><i class=" icon-angle-right"></i> Accessories</a></li>
+
+                    @foreach (Category item in Model.Categories)
+                    {
+                        <li style="padding-top:30px">
+
+                            <a asp-controller="Shopping" asp-action="Index" asp-route-categoryID="@item.ID" class="btn btn-primary">@item.CategoryName</a>
+
+
+                        </li>
+                    }
                 </ul>
             </div>
         </section>
-       
+
     </div>
     <div class="col-md-9">
         <section class="panel">
             <div class="panel-body">
-             
+
 
                 <div class="pull-right">
                     <ul class="pagination pagination-sm pro-page-list">
 
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">»</a></li>
+
+                        @if (TempData["catID"] != null)
+                        {
+                            <li> @Html.PagedListPager(Model.Products, page => Url.Action("Index", new { page, categoryID = TempData["catID"] }))     </li>
+                        }
+                        else
+                        {
+                            <li>
+                                @Html.PagedListPager(Model.Products, page => Url.Action("Index", new { page }))
+                            </li>
+                        }
+
+
+
+
                     </ul>
                 </div>
             </div>
         </section>
 
         <div class="row product-list">
-            <div class="col-md-4">
-                <section class="panel">
-                    <div class="pro-img-box">
-                        <img src="/OuterTools/img/product-list/pro-1.jpg" alt="" />
-                        <a href="#" class="adtocart">
-                            <i class="icon-shopping-cart"></i>
-                        </a>
-                    </div>
 
-                    <div class="panel-body text-center">
-                        <h4>
-                            <a href="#" class="pro-title">
-                                Leopard Shirt Dress
+            @foreach (Product item in Model.Products)
+            {
+
+                <div class="col-md-4">
+                    <section class="panel">
+                        <div class="pro-img-box">
+                            @if (item.ImagePath.Contains("nightlife"))
+                            {
+                                <img src="/images/TheWarrior.jpg" />
+                            }
+                            else
+                            {
+                                <img src="@item.ImagePath" alt="" />
+                            }
+
+                            <a asp-action="AddToCart" asp-route-id="@item.ID" class="adtocart">
+                                <i class="icon-shopping-cart"></i>
                             </a>
-                        </h4>
-                        <p class="price">$300.00</p>
-                    </div>
-                </section>
-            </div>
-     
+                        </div>
+
+                        <div class="panel-body text-center">
+                            <h4>
+                                <a href="#" class="pro-title" title="@item.Category.CategoryName">
+                                    @item.ProductName
+                                </a>
+                            </h4>
+                            <p class="price">$@item.UnitPrice</p>
+                        </div>
+                    </section>
+                </div>
+            }
+
+
+
         </div>
     </div>
 </div>
+
+@section Sepet {
+    <li>
+        <a asp-controller="Shopping" asp-action="CartPage" style="padding-left:50px"> <i class="icon-shopping-cart"></i> Cart  </a>
+    </li>
+}

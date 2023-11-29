@@ -1,5 +1,8 @@
-﻿namespace Project.COREMVC.Models.ShoppingTools
+﻿using Newtonsoft.Json;
+
+namespace Project.COREMVC.Models.ShoppingTools
 {
+    [Serializable]
     public class Cart
     {
         Dictionary<int, CartItem> _myCart;
@@ -9,9 +12,16 @@
             _myCart = new Dictionary<int, CartItem>();
         }
 
-        public List<CartItem> GetCartItems()
+
+
+        [JsonProperty("GetCartItems")]
+        public List<CartItem> GetCartItems
         {
-            return _myCart.Values.ToList();
+            get
+            {
+                return _myCart.Values.ToList();
+            }
+           
         }
 
 
@@ -48,9 +58,14 @@
         }
 
 
-        public decimal TotalPrice()
+        [JsonProperty("TotalPrice")]
+        public decimal TotalPrice
         {
-            return _myCart.Values.Sum(x => x.SubTotal);
+            get
+            {
+                return _myCart.Values.Sum(x => x.SubTotal);
+            }
+            
         }
 
        

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Project.BLL.ManagerServices.Abstracts;
-using Project.COREMVC.Models.PaveVms;
+using Project.COREMVC.Models.PageVms;
 using X.PagedList;
 
 namespace Project.COREMVC.Controllers
@@ -30,6 +30,12 @@ namespace Project.COREMVC.Controllers
           
 
             return View(spVm);
+        }
+
+
+        public IActionResult AddToCart(int id)
+        {
+            return View();
         }
     }
 }
