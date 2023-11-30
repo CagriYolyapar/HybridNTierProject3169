@@ -1,4 +1,5 @@
-﻿using Project.ENTITIES.Models;
+﻿using Project.COREMVC.Models.OuterRequestModels;
+using Project.ENTITIES.Models;
 
 namespace Project.COREMVC.Models.Orders
 {
@@ -7,6 +8,6 @@ namespace Project.COREMVC.Models.Orders
         //Refactor
         public Order Order { get; set; }
 
-        //public PaymentRequestModel MyProperty { get; set; }
+        public PaymentRequestModel PaymentRequestModel { get; set; }
     }
 }

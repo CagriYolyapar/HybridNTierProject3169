@@ -15,7 +15,9 @@ namespace Project.COREMVC.Controllers
     public class HomeController : Controller
     {
 
-
+        //Todo: SignIn yapan kullanıcı Register ve SignIn linklerini görmektense SignOut linkini görsün
+        //Todo: Beni hatırla icin checkbox koyun...
+       
         //ToDo : En önemli Refactoring'iniz burada BLL katmanındaki BL yapan interfaceleri kullanmanızdır
 
         //Todo: Validation'lar yapılacak
