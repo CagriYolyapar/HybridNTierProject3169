@@ -13,14 +13,14 @@ namespace Project.DAL.Repositories.Concretes
 {
     public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
     {
-        
+
 
         //Sizin kendinize özel Crud işlemlerinizin yine olması gerekir
 
 
         UserManager<AppUser> _userManager;
 
-        public AppUserRepository(MyContext db,UserManager<AppUser> userManager):base(db)
+        public AppUserRepository(MyContext db, UserManager<AppUser> userManager) : base(db)
         {
             _userManager = userManager;
         }
@@ -31,7 +31,13 @@ namespace Project.DAL.Repositories.Concretes
             IdentityResult result = await _userManager.CreateAsync(user, user.PasswordHash);
             if (result.Succeeded) return true;
             return false;
-            
+
         }
+
+
+        //public override void Deneme()
+        //{
+        //    throw new Exception("Bu eylem bu sınıf tarafından  calıstırılamaz"); //Yanlıs bir yontemdir...Liskov's Substitution'i böyle kurtaramazsınız...
+        //}
     }
 }

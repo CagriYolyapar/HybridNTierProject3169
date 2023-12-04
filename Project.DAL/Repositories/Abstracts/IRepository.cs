@@ -51,5 +51,8 @@ namespace Project.DAL.Repositories.Abstracts
         List<T> GetFirstDatas(int count);
 
 
+        //void Deneme();
+
+
     }
 }

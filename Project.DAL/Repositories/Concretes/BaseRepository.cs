@@ -170,5 +170,10 @@ namespace Project.DAL.Repositories.Concretes
         {
             return await _db.Set<T>().Where(x => x.Status != ENTITIES.Enums.DataStatus.Deleted).ToListAsync();
         }
+
+        //public virtual void Deneme()
+        //{
+        //    //bisiler bisiler
+        //}
     }
 }

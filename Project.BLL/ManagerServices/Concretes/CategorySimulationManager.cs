@@ -1,4 +1,4 @@
-﻿using Project.BLL.DTOClasses;
+﻿using Project.BLL.RefactorExample.DTOClasses;
 using Project.DAL.ContextClasses;
 using Project.DAL.Repositories.Abstracts;
 using Project.DAL.Repositories.Concretes;

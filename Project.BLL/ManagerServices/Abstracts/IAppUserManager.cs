@@ -1,4 +1,5 @@
-﻿using Project.ENTITIES.Models;
+﻿using Project.DAL.Repositories.Abstracts;
+using Project.ENTITIES.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Project.BLL.ManagerServices.Abstracts
     //Todo : AppUserManager Encapsulation
     public interface IAppUserManager : IManager<AppUser>
     {
+     
         Task<bool> AddUser(AppUser user);
     }
 }

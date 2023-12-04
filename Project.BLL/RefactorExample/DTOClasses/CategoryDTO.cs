@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.BLL.DTOClasses
+namespace Project.BLL.RefactorExample.DTOClasses
 {
-    public class CategoryDTO
+    public class CategoryDTO : BaseDTO
     {
-        
+
         public string CategoryName { get; set; }
         public string Description { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        //public DateTime? CreatedDate { get; set; }
 
 
     }

@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ProjeAdimlari.txt = ProjeAdimlari.txt
 		ProjeTeknikDokumantasyonu.txt = ProjeTeknikDokumantasyonu.txt
 		ReadMe.txt = ReadMe.txt
+		Son Odev.txt = Son Odev.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.COMMON", "Project.COMMON\Project.COMMON.csproj", "{DEABF61C-B2D8-415A-99F8-DA6C72E181E1}"
