@@ -44,6 +44,8 @@ namespace Project.DAL.Repositories.Abstracts
         IQueryable<X> Select<X>(Expression<Func<T, X>> exp);
 
         //Find Command
+
+        //Todo : BUrada int id parametresini Find icin Params yapmanız gerekir ki junction table'lar icin de calıssın
         Task<T> FindAsync(int id);
         //Last Datas
         List<T> GetLastDatas(int count);
